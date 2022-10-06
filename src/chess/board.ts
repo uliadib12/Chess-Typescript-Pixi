@@ -22,7 +22,7 @@ export default class Board implements Drawble{
                 const tileCount = y * TILE_XY_COUNT + x
 
                 let tile = new PIXI.Graphics()
-                tile.lineStyle(2, 0x808080, 1)
+                // tile.lineStyle(2, 0x808080, 1)
                 tile.beginFill( (((tileCount + y) % 2) != 0) ? this.colorOdd : this.colorEven)
                 tile.drawRect(0, 0, sizeTile, sizeTile)
                 tile.endFill()

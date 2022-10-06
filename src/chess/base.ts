@@ -3,8 +3,8 @@ import { Pos } from "../util/interface"
 const TILE_XY_COUNT = 8;
 
 export default abstract class Base {
-   abstract id : {id: number, type: string}
-   abstract position: Pos
+   abstract id : number
+   protected position: Pos
    abstract getMove(): Pos[]
    abstract setPositon(newPositon: Pos): void
    
