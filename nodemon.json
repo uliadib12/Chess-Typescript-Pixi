@@ -1,0 +1,5 @@
+{
+    "watch": ["src"],
+    "ext": "ts,json,js",
+    "exec": "npx webpack && node ./src/app.js"
+}
