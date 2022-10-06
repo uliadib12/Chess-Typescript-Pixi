@@ -2,9 +2,9 @@ import { Drawble } from "../util/interface"
 import PIXI from "../util/PIXI"
 import { app } from "../util/PIXI"
 
-export class Board implements Drawble{
-    private readonly TILE_XY_COUNT = 8;
+const TILE_XY_COUNT = 8;
 
+export default class Board implements Drawble{
     private colorOdd: number
     private colorEven: number
 
@@ -16,10 +16,10 @@ export class Board implements Drawble{
     public draw(){
         const container = new PIXI.Container();
         
-        for (let y = 0; y < this.TILE_XY_COUNT; y++) {
-            for (let x = 0; x < this.TILE_XY_COUNT; x++) {
+        for (let y = 0; y < TILE_XY_COUNT; y++) {
+            for (let x = 0; x < TILE_XY_COUNT; x++) {
                 const sizeTile : number = app.view.width * 1/8
-                const tileCount = y * this.TILE_XY_COUNT + x
+                const tileCount = y * TILE_XY_COUNT + x
 
                 let tile = new PIXI.Graphics()
                 tile.lineStyle(2, 0x808080, 1)
