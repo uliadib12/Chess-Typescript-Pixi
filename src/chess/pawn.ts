@@ -34,8 +34,7 @@ export default class Pawn extends Base implements Drawble{
     private eventInteraction(){
         this.sprite.interactive = true
         this.sprite.on('pointerdown', (event) => { 
-            this.setPositon({x: this.position.x, y: 5})
-            console.log(this.position)
+            this.setPositon(this.getMove()[0])
          });
     }
     
@@ -46,10 +45,7 @@ export default class Pawn extends Base implements Drawble{
 
     draw(): void {
         this.sprite.scale = new PIXI.Point(this.spriteScale, this.spriteScale)
-
-        this.sprite.x = (this.position.x - 1) * this.spriteScale * 135 + 7
-        this.sprite.y = app.view.height - (this.position.y - 1) * this.spriteScale * 135 - 70
-        
+        this.moveSprite(this.position)
         app.stage.addChild(this.sprite)
 
     }
