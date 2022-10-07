@@ -1,4 +1,3 @@
-import Base from "../chess/base"
 import Pawn from "../chess/pawn"
 
 export default class Player {
