@@ -2,16 +2,19 @@ import { Drawble, Pos } from "../util/interface";
 import PIXI, { app } from "../util/PIXI";
 import Base from "./Base";
 
-export default class Pawn extends Base implements Drawble{
+export default class Pawn extends Base{
     public id: number
+    public playerNumber: number
     public isFirstMove: boolean = true
-    private readonly sprite = PIXI.Sprite.from('./sprite/b_pawn_png_shadow_128px.png')
+    public sprite : PIXI.Sprite
     private readonly spriteScale = 0.55
 
-    constructor(id: number, positon: Pos){
+    constructor(id: number, positon: Pos, playerNumber: number , textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_pawn_png_shadow_128px.png')){
         super();
         this.position = positon
         this.id = id
+        this.playerNumber = playerNumber
+        this.sprite = textureSprite
         this.eventInteraction()
     }
     
@@ -24,7 +27,12 @@ export default class Pawn extends Base implements Drawble{
     getMove(): Pos[] {
         let newPos : Pos[] = []
         for (let i = 1; i <= (this.isFirstMove ? 2 : 1); i++) {
-            newPos.push({x: this.position.x , y: this.position.y + i})
+            if(this.playerNumber == 1){
+                newPos.push({x: this.position.x , y: this.position.y + i})
+            }
+            else{
+                newPos.push({x: this.position.x , y: this.position.y - i})
+            }
         }
 
         newPos = super.solveBoundary(newPos)
@@ -32,8 +40,10 @@ export default class Pawn extends Base implements Drawble{
     }
 
     private eventInteraction(){
-        this.sprite.interactive = true
-        this.sprite.on('pointerdown', (event) => { 
+        this.sprite.buttonMode = true
+
+        this.sprite.on('pointerdown', (event) => {
+            // console.log(this.getMove())
             this.setPositon(this.getMove()[0])
          });
     }
@@ -47,6 +57,5 @@ export default class Pawn extends Base implements Drawble{
         this.sprite.scale = new PIXI.Point(this.spriteScale, this.spriteScale)
         this.moveSprite(this.position)
         app.stage.addChild(this.sprite)
-
     }
 }
