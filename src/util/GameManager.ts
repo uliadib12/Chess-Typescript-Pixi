@@ -21,10 +21,10 @@ export default class GameManager {
         this.createBoard()
         this.playerOne = new Player(1)
         this.playerOne.createPieces()
-        this.playerOne.setInteractive(true)
         this.playerTwo = new Player(2)
         this.playerTwo.createPieces()
-        this.playerTwo.setInteractive(true)
         this.state = "Rest"
+        this.playerOne.setInteractive(true)
+        this.playerTwo.setInteractive(false)
     }
 }

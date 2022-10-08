@@ -55,13 +55,22 @@ export default class Player {
 
    public selectPieces(piece: Base){
       GameManager.Instance.state = "Select"
-      this.piecesSelected = piece
-      this.isPiecesSelected = true
       
       if(this.dotsMoves.length){
          this.deleteDot()
+         this.isPiecesSelected = false
       }
-      this.drawMove(piece)
+      
+      if(this.isPiecesSelected == false && piece != this.piecesSelected){
+         this.drawMove(piece)
+         this.isPiecesSelected = true
+         this.piecesSelected = piece
+      }
+      else{
+         this.deleteDot()
+         this.isPiecesSelected = false
+         this.piecesSelected = undefined
+      }      
    }
 
    private deleteDot(){
