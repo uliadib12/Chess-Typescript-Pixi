@@ -3,7 +3,7 @@ import PIXI from "../util/PIXI";
 import Pawn from "./Pawn";
 
 export class Rook extends Pawn{
-    constructor(id: number, positon: Pos, playerNumber: number , textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_rook_png_shadow_128px.png')){
+    constructor(id: number, positon: Pos, playerNumber: 1 | 2 , textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_rook_png_shadow_128px.png')){
         super(id,positon,playerNumber,textureSprite);
     }
 

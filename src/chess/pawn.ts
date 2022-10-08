@@ -7,7 +7,7 @@ import Base from "./Base";
 export default class Pawn extends Base{
     private isFirstMove: boolean = true
     
-    constructor(id: number, positon: Pos, playerNumber: number , textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_pawn_png_shadow_128px.png')){
+    constructor(id: number, positon: Pos, playerNumber: 1 | 2 , textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_pawn_png_shadow_128px.png')){
         super();
         this.position = positon
         this.id = id

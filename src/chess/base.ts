@@ -1,11 +1,11 @@
 import { Drawble, Pos } from "../util/interface"
-import PIXI from "../util/PIXI";
+import PIXI, { app } from "../util/PIXI";
 
 const TILE_XY_COUNT = 8;
 
 export default abstract class Base implements Drawble {
    public id : number
-   public playerNumber: number
+   public playerNumber: 1 | 2
    public position: Pos
    public sprite : PIXI.Sprite
    protected readonly spriteScale = 0.55
