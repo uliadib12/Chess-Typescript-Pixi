@@ -42,6 +42,8 @@ export default class Player {
          box.on('pointerdown', (event) => {
             piece.setPositon(move)
             this.deleteDot()
+            this.piecesSelected = undefined
+            this.isPiecesSelected = false
          })
 
          dotContainer.addChild(dot)
