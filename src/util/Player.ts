@@ -1,15 +1,15 @@
 import Base from "../chess/Base"
 import { SIZE_TILE } from "../chess/Board"
 import Pawn from "../chess/Pawn"
+import { Rook } from "../chess/Rook"
 import GameManager from "./GameManager"
-import { Pos } from "./interface"
 import PIXI, { app } from "./PIXI"
 
 export default class Player {
    private playerNumber: 1 | 2
    private color: "white" | "black"
    private countPieces = 0
-   private pieces: {pawns: Pawn[]} = {pawns: []}
+   private pieces: {pawns: Pawn[], rooks: Rook[]} = {pawns: [], rooks: []}
    private piecesSelected: Base 
    private dotsMoves: PIXI.Container[] = []
    private isPiecesSelected: boolean = false
@@ -20,6 +20,7 @@ export default class Player {
    }
 
    private drawMove(piece: Base){
+      console.log(piece)
       let moves = piece.getMove()
 
       moves.forEach((move)=>{
@@ -85,6 +86,9 @@ export default class Player {
       this.pieces.pawns.forEach((pawn)=>{
          pawn.sprite.interactive = active
       })
+      this.pieces.rooks.forEach((pawn)=>{
+         pawn.sprite.interactive = active
+      })
    }
 
    private createPawn(){
@@ -103,7 +107,24 @@ export default class Player {
       }
   }
 
+  private createRook(){
+      for (let i = 1; i <= 2; i++) {
+         let y = this.playerNumber == 1 ? 1 : 8
+         let rook: Rook
+         if(this.color == "white"){
+            rook = new Rook(i , {x: i == 1 ? 1 : 8, y}, this.playerNumber, PIXI.Sprite.from('./sprite/w_rook_png_shadow_128px.png'))
+         }
+         else{
+            rook = new Rook(i , {x: i == 1 ? 1 : 8, y}, this.playerNumber, PIXI.Sprite.from('./sprite/b_rook_png_shadow_128px.png'))
+         }
+         rook.draw()
+         this.pieces.rooks.push(rook)
+         this.countPieces += 1
+      }
+  }
+
    public createPieces(){
       this.createPawn()
+      this.createRook()
    }
 }

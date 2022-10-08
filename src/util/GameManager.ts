@@ -25,6 +25,6 @@ export default class GameManager {
         this.playerTwo.createPieces()
         this.state = "Rest"
         this.playerOne.setInteractive(true)
-        this.playerTwo.setInteractive(false)
+        this.playerTwo.setInteractive(true)
     }
 }

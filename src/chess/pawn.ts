@@ -1,16 +1,12 @@
 import GameManager from "../util/GameManager";
-import { Drawble, Pos } from "../util/interface";
+import { Pos } from "../util/interface";
 import PIXI, { app } from "../util/PIXI";
 import Player from "../util/Player";
 import Base from "./Base";
 
 export default class Pawn extends Base{
-    public id: number
-    public playerNumber: number
-    public isFirstMove: boolean = true
-    public sprite : PIXI.Sprite
-    private readonly spriteScale = 0.55
-
+    private isFirstMove: boolean = true
+    
     constructor(id: number, positon: Pos, playerNumber: number , textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_pawn_png_shadow_128px.png')){
         super();
         this.position = positon
@@ -41,7 +37,7 @@ export default class Pawn extends Base{
         return newPos
     }
 
-    private eventInteraction(){
+    eventInteraction(){
         this.sprite.buttonMode = true
 
         let player: Player
@@ -57,7 +53,7 @@ export default class Pawn extends Base{
          })
     }
     
-    private moveSprite(pos: Pos){
+    moveSprite(pos: Pos){
         this.sprite.x = (pos.x - 1) * this.spriteScale * 136 + 6
         this.sprite.y = app.view.height - (pos.y - 1) * this.spriteScale * 135.5 - 72
     }
