@@ -5,7 +5,7 @@ import Base from "./Base";
 export default class Pawn extends Base implements Drawble{
     public id: number
     public isFirstMove: boolean = true
-    private readonly sprite = PIXI.Sprite.from('./sprite/w_pawn_png_shadow_128px.png')
+    private readonly sprite = PIXI.Sprite.from('./sprite/b_pawn_png_shadow_128px.png')
     private readonly spriteScale = 0.55
 
     constructor(id: number, positon: Pos){
@@ -39,8 +39,8 @@ export default class Pawn extends Base implements Drawble{
     }
     
     private moveSprite(pos: Pos){
-        this.sprite.x = (pos.x - 1) * this.spriteScale * 135 + 7
-        this.sprite.y = app.view.height - (pos.y - 1) * this.spriteScale * 135 - 70
+        this.sprite.x = (pos.x - 1) * this.spriteScale * 136 + 6
+        this.sprite.y = app.view.height - (pos.y - 1) * this.spriteScale * 135.5 - 72
     }
 
     draw(): void {
