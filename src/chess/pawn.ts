@@ -1,5 +1,7 @@
+import GameManager from "../util/GameManager";
 import { Drawble, Pos } from "../util/interface";
 import PIXI, { app } from "../util/PIXI";
+import Player from "../util/Player";
 import Base from "./Base";
 
 export default class Pawn extends Base{
@@ -42,10 +44,17 @@ export default class Pawn extends Base{
     private eventInteraction(){
         this.sprite.buttonMode = true
 
+        let player: Player
+        if(this.playerNumber == 1){
+            player = GameManager.Instance.playerOne
+        }
+        else if(this.playerNumber == 2){
+            player = GameManager.Instance.playerTwo
+        }
+
         this.sprite.on('pointerdown', (event) => {
-            // console.log(this.getMove())
-            this.setPositon(this.getMove()[0])
-         });
+            player.selectPieces(this)
+         })
     }
     
     private moveSprite(pos: Pos){

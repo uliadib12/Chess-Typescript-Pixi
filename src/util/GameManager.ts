@@ -3,8 +3,9 @@ import Player from "./Player";
 
 export default class GameManager {
     private static instance: GameManager;
-    private playerOne: Player
-    private playerTwo: Player
+    public state: "Build" | "Rest" | "Select" | "Selected" | "Next Turn" = "Build"
+    public playerOne: Player
+    public playerTwo: Player
 
     public static get Instance()
     {
@@ -16,11 +17,14 @@ export default class GameManager {
         new Board(0x769656, 0xEEEED2).draw()
     }
 
-
     public buildGame(){
         this.createBoard()
         this.playerOne = new Player(1)
         this.playerOne.createPieces()
         this.playerOne.setInteractive(true)
+        this.playerTwo = new Player(2)
+        this.playerTwo.createPieces()
+        this.playerTwo.setInteractive(true)
+        this.state = "Rest"
     }
 }
