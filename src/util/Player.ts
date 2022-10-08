@@ -1,6 +1,7 @@
 import Base from "../chess/Base"
 import { Bishop } from "../chess/Bishop"
 import { SIZE_TILE } from "../chess/Board"
+import { King } from "../chess/King"
 import { Knight } from "../chess/Knight"
 import Pawn from "../chess/Pawn"
 import { Queen } from "../chess/Queen"
@@ -12,7 +13,7 @@ export default class Player {
    private playerNumber: 1 | 2
    private color: "white" | "black"
    private countPieces = 0
-   private pieces: {pawns: Pawn[], rooks: Rook[], knight: Knight[], bishop: Bishop[], queen: Queen[]} = {pawns: [], rooks: [], knight: [], bishop: [], queen: []}
+   private pieces: {pawns: Pawn[], rooks: Rook[], knight: Knight[], bishop: Bishop[], queen: Queen[], king?: King} = {pawns: [], rooks: [], knight: [], bishop: [], queen: []}
    private piecesSelected: Base 
    private dotsMoves: PIXI.Container[] = []
    private isPiecesSelected: boolean = false
@@ -100,6 +101,7 @@ export default class Player {
       this.pieces.queen.forEach((queen)=>{
          queen.sprite.interactive = active
       })
+      if(this.pieces.king != undefined) this.pieces.king.sprite.interactive = true
    }
 
    private createPawn(){
@@ -180,11 +182,26 @@ export default class Player {
       this.countPieces += 1
    }
 
+   private createKing(){
+      let y = this.playerNumber == 1 ? 1 : 8
+      let king: King
+      if(this.color == "white"){
+         king = new King(1 , {x: 5, y}, this.playerNumber, PIXI.Sprite.from('./sprite/w_king_png_shadow_128px.png'))
+      }
+      else{
+         king = new King(1 , {x: 4, y}, this.playerNumber, PIXI.Sprite.from('./sprite/b_king_png_shadow_128px.png'))
+      }
+      king.draw()
+      this.pieces.king = king
+      this.countPieces += 1
+   }
+
    public createPieces(){
       this.createPawn()
       this.createRook()
       this.createKnight()
       this.createBishop()
       this.createQueen()
+      this.createKing()
    }
 }
