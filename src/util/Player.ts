@@ -2,12 +2,12 @@ import Pawn from "../chess/Pawn"
 import PIXI from "./PIXI"
 
 export default class Player {
-   private playerNumber: number
+   private playerNumber: 1 | 2
    private color: "white" | "black"
    private countPieces = 0
    private pieces : {pawns: Pawn[]} = {pawns: []}
 
-   constructor(whichPlayer: number){
+   constructor(whichPlayer: 1 | 2){
       this.playerNumber = whichPlayer
       this.color = this.playerNumber == 1 ? "white" : "black"
    }
