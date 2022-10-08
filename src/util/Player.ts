@@ -1,4 +1,5 @@
 import Base from "../chess/Base"
+import { Bishop } from "../chess/Bishop"
 import { SIZE_TILE } from "../chess/Board"
 import { Knight } from "../chess/Knight"
 import Pawn from "../chess/Pawn"
@@ -10,7 +11,7 @@ export default class Player {
    private playerNumber: 1 | 2
    private color: "white" | "black"
    private countPieces = 0
-   private pieces: {pawns: Pawn[], rooks: Rook[], knight: Knight[]} = {pawns: [], rooks: [], knight: []}
+   private pieces: {pawns: Pawn[], rooks: Rook[], knight: Knight[], bishop: Bishop[]} = {pawns: [], rooks: [], knight: [], bishop: []}
    private piecesSelected: Base 
    private dotsMoves: PIXI.Container[] = []
    private isPiecesSelected: boolean = false
@@ -86,11 +87,14 @@ export default class Player {
       this.pieces.pawns.forEach((pawn)=>{
          pawn.sprite.interactive = active
       })
-      this.pieces.rooks.forEach((pawn)=>{
-         pawn.sprite.interactive = active
+      this.pieces.rooks.forEach((rook)=>{
+         rook.sprite.interactive = active
       })
-      this.pieces.knight.forEach((pawn)=>{
-         pawn.sprite.interactive = active
+      this.pieces.knight.forEach((knight)=>{
+         knight.sprite.interactive = active
+      })
+      this.pieces.bishop.forEach((bishop)=>{
+         bishop.sprite.interactive = active
       })
    }
 
@@ -127,24 +131,41 @@ export default class Player {
   }
 
   private createKnight(){
-   for (let i = 1; i <= 2; i++) {
-      let y = this.playerNumber == 1 ? 1 : 8
-      let knight: Knight
-      if(this.color == "white"){
-         knight = new Knight(i , {x: i == 1 ? 2 : 7, y}, this.playerNumber, PIXI.Sprite.from('./sprite/w_knight_png_shadow_128px.png'))
+      for (let i = 1; i <= 2; i++) {
+         let y = this.playerNumber == 1 ? 1 : 8
+         let knight: Knight
+         if(this.color == "white"){
+            knight = new Knight(i , {x: i == 1 ? 2 : 7, y}, this.playerNumber, PIXI.Sprite.from('./sprite/w_knight_png_shadow_128px.png'))
+         }
+         else{
+            knight = new Knight(i , {x: i == 1 ? 2 : 7, y}, this.playerNumber, PIXI.Sprite.from('./sprite/b_knight_png_shadow_128px.png'))
+         }
+         knight.draw()
+         this.pieces.knight.push(knight)
+         this.countPieces += 1
       }
-      else{
-         knight = new Knight(i , {x: i == 1 ? 2 : 7, y}, this.playerNumber, PIXI.Sprite.from('./sprite/b_knight_png_shadow_128px.png'))
+  }
+
+  private createBishop(){
+      for (let i = 1; i <= 2; i++) {
+         let y = this.playerNumber == 1 ? 1 : 8
+         let bishop: Bishop
+         if(this.color == "white"){
+            bishop = new Bishop(i , {x: i == 1 ? 3 : 6, y}, this.playerNumber, PIXI.Sprite.from('./sprite/w_bishop_png_shadow_128px.png'))
+         }
+         else{
+            bishop = new Bishop(i , {x: i == 1 ? 3 : 6, y}, this.playerNumber, PIXI.Sprite.from('./sprite/b_bishop_png_shadow_128px.png'))
+         }
+         bishop.draw()
+         this.pieces.bishop.push(bishop)
+         this.countPieces += 1
       }
-      knight.draw()
-      this.pieces.knight.push(knight)
-      this.countPieces += 1
-   }
   }
 
    public createPieces(){
       this.createPawn()
       this.createRook()
       this.createKnight()
+      this.createBishop()
    }
 }
