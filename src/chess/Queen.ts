@@ -1,8 +1,9 @@
 import { Pos } from "../util/interface";
 import PIXI from "../util/PIXI";
 import Pawn from "./Pawn";
+import Pieces from "./Pieces";
 
-export class Queen extends Pawn {
+export class Queen extends Pieces {
     constructor(id: number, positon: Pos, playerNumber: 1 | 2, textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_queen_png_shadow_128px.png')){
         super(id,positon,playerNumber,textureSprite);
     }

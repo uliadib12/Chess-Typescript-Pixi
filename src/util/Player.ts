@@ -1,9 +1,9 @@
-import Base from "../chess/Base"
 import { Bishop } from "../chess/Bishop"
 import { SIZE_TILE } from "../chess/Board"
 import { King } from "../chess/King"
 import { Knight } from "../chess/Knight"
 import Pawn from "../chess/Pawn"
+import Pieces from "../chess/Pieces"
 import { Queen } from "../chess/Queen"
 import { Rook } from "../chess/Rook"
 import GameManager from "./GameManager"
@@ -14,7 +14,7 @@ export default class Player {
    private color: "white" | "black"
    private countPieces = 0
    private pieces: {pawns: Pawn[], rooks: Rook[], knight: Knight[], bishop: Bishop[], queen: Queen[], king?: King} = {pawns: [], rooks: [], knight: [], bishop: [], queen: []}
-   private piecesSelected: Base 
+   private piecesSelected: Pieces
    private dotsMoves: PIXI.Container[] = []
    private isPiecesSelected: boolean = false
 
@@ -23,7 +23,7 @@ export default class Player {
       this.color = this.playerNumber == 1 ? "white" : "black"
    }
 
-   private drawMove(piece: Base){
+   private drawMove(piece: Pieces){
       let moves = piece.getMove()
 
       moves.forEach((move)=>{
@@ -59,7 +59,7 @@ export default class Player {
       })
    }
 
-   public selectPieces(piece: Base){
+   public selectPieces(piece: Pieces){
       GameManager.Instance.state = "Select"
       
       if(this.dotsMoves.length){
