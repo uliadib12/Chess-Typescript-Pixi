@@ -11,7 +11,6 @@ export default class GameManager {
     {
         return this.instance || (this.instance = new this());
     }
-    
 
     private createBoard(){
         new Board(0x769656, 0xEEEED2).draw()

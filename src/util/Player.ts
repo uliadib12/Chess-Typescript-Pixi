@@ -23,6 +23,10 @@ export default class Player {
       this.color = this.playerNumber == 1 ? "white" : "black"
    }
 
+   public getAllPieces() : {pawns: Pawn[], rooks: Rook[], knight: Knight[], bishop: Bishop[], queen: Queen[], king?: King}{
+      return this.pieces
+   }
+
    private drawMove(piece: Pieces){
       let moves = piece.getMove()
 

@@ -7,6 +7,90 @@ export class Rook extends Pieces{
     constructor(id: number, positon: Pos, playerNumber: 1 | 2 , textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_rook_png_shadow_128px.png')){
         super(id,positon,playerNumber,textureSprite)
     }
+    
+    seperatePieceMoves(position: Pos[]): Pos[][] {
+        let newPosition: Pos[][] = []
+
+        let tempPositon = position
+
+        newPosition.push(tempPositon.filter((pos) => {
+            if(pos.x == this.position.x && pos.y > this.position.y){
+                return true
+            }
+        }))
+
+        newPosition.push(tempPositon.filter((pos) => {
+            if(pos.x == this.position.x && pos.y < this.position.y){
+                return true
+            }
+        }))
+
+        newPosition.push(tempPositon.filter((pos) => {
+            if(pos.y == this.position.y && pos.x > this.position.x){
+                return true
+            }
+        }))
+
+        newPosition.push(tempPositon.filter((pos) => {
+            if(pos.y == this.position.y && pos.x < this.position.x){
+                return true
+            }
+        }))
+        
+        return newPosition
+    }
+
+    protected solveBlocked(position: Pos[]): Pos[] {
+        let newMove: Pos[] = []
+        const allPos = this.getAllPiecesPosition() 
+        let allPiecesPosition = allPos.playerOne.concat(allPos.playerTwo)
+        let seperatePieceMoves = this.seperatePieceMoves(position)
+
+        for (let i = 0; i < 4; i++) {
+            let moves = seperatePieceMoves[i]
+            let blockPieces: Pos[] = []
+
+            moves.forEach((move)=>{
+                allPiecesPosition.forEach((pos)=>{
+                    if(move.x == pos.x && move.y == pos.y){
+                        blockPieces.push(move)
+                    }
+                })
+            })
+
+            if(blockPieces.length){
+                moves.forEach((move)=>{
+                    if(i == 0){
+                        if(move.y < blockPieces[0].y){
+                            newMove.push(move)
+                        }
+                    }
+                    if(i == 1){
+                        if(move.y > blockPieces[0].y){
+                            newMove.push(move)
+                        }
+                    }
+                    if(i == 2){
+                        if(move.x < blockPieces[0].x){
+                            newMove.push(move)
+                        }
+                    }
+                    if(i == 3){
+                        if(move.x > blockPieces[0].x){
+                            newMove.push(move)
+                        }
+                    }
+                })
+            }
+            else{
+                moves.forEach(move=>{
+                    newMove.push(move)
+                })
+            }
+        }
+
+        return newMove
+    }
 
     getMove(): Pos[] {
         let newPos : Pos[] = []
@@ -19,6 +103,8 @@ export class Rook extends Pieces{
         }
 
         newPos = super.solveBoundary(newPos)
+        newPos = this.solveBlocked(newPos)
+
         return newPos
     }
 }

@@ -20,6 +20,65 @@ export default abstract class Pieces implements Drawble {
       this.eventInteraction()
   }
 
+  private getPlayerClass() : Player{
+      let player: Player
+
+      if(this.playerNumber == 1){
+         player = GameManager.Instance.playerOne
+      }
+      else if(this.playerNumber == 2){
+         player = GameManager.Instance.playerTwo
+      }
+      
+      return player
+  }
+
+//   abstract seperatePieceMoves(position: Pos[]): Pos[][]
+
+  protected getAllPiecesPosition(): {playerOne: Pos[], playerTwo: Pos[]}{
+      let position: {playerOne: Pos[], playerTwo: Pos[]} = {playerOne: [], playerTwo: []}
+      const playerOne = GameManager.Instance.playerOne
+      const playerTwo = GameManager.Instance.playerTwo
+      const piecesPlayerOne = playerOne.getAllPieces()
+      const piecesPlayerTwo = playerTwo.getAllPieces()
+
+      piecesPlayerOne.pawns.forEach((pawn)=>{
+         position.playerOne.push(pawn.position)
+      })
+      piecesPlayerOne.rooks.forEach((rook)=>{
+         position.playerOne.push(rook.position)
+      })
+      piecesPlayerOne.knight.forEach((knight)=>{
+         position.playerOne.push(knight.position)
+      })
+      piecesPlayerOne.bishop.forEach((bishop)=>{
+         position.playerOne.push(bishop.position)
+      })
+      piecesPlayerOne.queen.forEach((queen)=>{
+         position.playerOne.push(queen.position)
+      })
+      if(piecesPlayerOne.king != undefined) position.playerOne.push(piecesPlayerOne.king.position)
+
+      piecesPlayerTwo.pawns.forEach((pawn)=>{
+         position.playerTwo.push(pawn.position)
+      })
+      piecesPlayerTwo.rooks.forEach((rook)=>{
+         position.playerTwo.push(rook.position)
+      })
+      piecesPlayerTwo.knight.forEach((knight)=>{
+         position.playerTwo.push(knight.position)
+      })
+      piecesPlayerTwo.bishop.forEach((bishop)=>{
+         position.playerTwo.push(bishop.position)
+      })
+      piecesPlayerTwo.queen.forEach((queen)=>{
+         position.playerTwo.push(queen.position)
+      })
+      if(piecesPlayerTwo.king != undefined) position.playerTwo.push(piecesPlayerTwo.king.position)
+
+      return position
+  }
+
    setPositon(newPositon: Pos): void {
       this.position = newPositon
       this.moveSprite(newPositon)
@@ -34,19 +93,15 @@ export default abstract class Pieces implements Drawble {
       }
    })
 
-   return result
-} 
+      return result
+   } 
+
+   // protected abstract solveBlocked(position: Pos[]): Pos[]
 
   eventInteraction(){
       this.sprite.buttonMode = true
 
-      let player: Player
-      if(this.playerNumber == 1){
-          player = GameManager.Instance.playerOne
-      }
-      else if(this.playerNumber == 2){
-          player = GameManager.Instance.playerTwo
-      }
+      let player: Player = this.getPlayerClass()
 
       this.sprite.on('pointerdown', (event) => {
           player.selectPieces(this)

@@ -3,7 +3,6 @@ import { Pos } from "../util/interface";
 import PIXI, { app } from "../util/PIXI";
 import Player from "../util/Player";
 import Pieces from "./Pieces";
-import Base from "./Pieces";
 
 export default class Pawn extends Pieces{
     private isFirstMove: boolean = true
