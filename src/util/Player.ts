@@ -7,10 +7,11 @@ import Pieces from "../chess/Pieces"
 import { Queen } from "../chess/Queen"
 import { Rook } from "../chess/Rook"
 import GameManager from "./GameManager"
+import { Pos } from "./interface"
 import PIXI, { app } from "./PIXI"
 
 export default class Player {
-   private playerNumber: 1 | 2
+   public playerNumber: 1 | 2
    private color: "white" | "black"
    private countPieces = 0
    private pieces: {pawns: Pawn[], rooks: Rook[], knight: Knight[], bishop: Bishop[], queen: Queen[], king?: King} = {pawns: [], rooks: [], knight: [], bishop: [], queen: []}

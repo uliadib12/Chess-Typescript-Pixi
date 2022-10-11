@@ -1,3 +1,4 @@
+import GameManager from "../util/GameManager";
 import { Pos } from "../util/interface";
 import PIXI from "../util/PIXI";
 import Pawn from "./Pawn";
@@ -40,9 +41,29 @@ export class Rook extends Pieces{
         return newPosition
     }
 
-    protected solveBlocked(position: Pos[]): Pos[] {
+    private getPiecePlayerWithPos(position: Pos): "playerOne" | "playerTwo" | "notFound"{
+        const allPos = GameManager.Instance.getAllPiecesPosition()
+
+        let returnVal : "playerOne" | "playerTwo" | "notFound" = "notFound"
+
+        allPos.playerOne.forEach(pos=>{
+            if(pos.x == position.x && pos.y == position.y){
+                returnVal = "playerOne"
+            }
+        })
+
+        allPos.playerTwo.forEach(pos=>{
+            if(pos.x == position.x && pos.y == position.y){
+                returnVal = "playerTwo"
+            }
+        })
+
+        return returnVal
+    }
+
+    private solveBlocked(position: Pos[]): Pos[] {
         let newMove: Pos[] = []
-        const allPos = this.getAllPiecesPosition() 
+        const allPos = GameManager.Instance.getAllPiecesPosition() 
         let allPiecesPosition = allPos.playerOne.concat(allPos.playerTwo)
         let seperatePieceMoves = this.seperatePieceMoves(position)
 
@@ -61,23 +82,107 @@ export class Rook extends Pieces{
             if(blockPieces.length){
                 moves.forEach((move)=>{
                     if(i == 0){
-                        if(move.y < blockPieces[0].y){
-                            newMove.push(move)
+                        if(this.playerNumber == 1){
+                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                                if(move.y < blockPieces[0].y){
+                                    newMove.push(move)
+                                }
+                            }
+                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                                if(move.y < blockPieces[0].y + 1){
+                                    newMove.push(move)
+                                }
+                            }
+                        }
+                        else{
+                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                                if(move.y < blockPieces[0].y){
+                                    newMove.push(move)
+                                }
+                            }
+                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                                if(move.y < blockPieces[0].y + 1){
+                                    newMove.push(move)
+                                }
+                            }
                         }
                     }
                     if(i == 1){
-                        if(move.y > blockPieces[0].y){
-                            newMove.push(move)
+                        if(this.playerNumber == 1){
+                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                                if(move.y > blockPieces[0].y){
+                                    newMove.push(move)
+                                }
+                            }
+                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                                if(move.y > blockPieces[0].y - 1){
+                                    newMove.push(move)
+                                }
+                            }
+                        }
+                        else{
+                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                                if(move.y > blockPieces[0].y){
+                                    newMove.push(move)
+                                }
+                            }
+                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                                if(move.y > blockPieces[0].y - 1){
+                                    newMove.push(move)
+                                }
+                            }
                         }
                     }
                     if(i == 2){
-                        if(move.x < blockPieces[0].x){
-                            newMove.push(move)
+                        if(this.playerNumber == 1){
+                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                                if(move.x < blockPieces[0].x){
+                                    newMove.push(move)
+                                }
+                            }
+                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                                if(move.x < blockPieces[0].x + 1){
+                                    newMove.push(move)
+                                }
+                            }
+                        }
+                        else{
+                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                                if(move.x < blockPieces[0].x){
+                                    newMove.push(move)
+                                }
+                            }
+                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                                if(move.x < blockPieces[0].x + 1){
+                                    newMove.push(move)
+                                }
+                            }
                         }
                     }
                     if(i == 3){
-                        if(move.x > blockPieces[0].x){
-                            newMove.push(move)
+                        if(this.playerNumber == 1){
+                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                                if(move.x > blockPieces[0].x){
+                                    newMove.push(move)
+                                }
+                            }
+                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                                if(move.x > blockPieces[0].x - 1){
+                                    newMove.push(move)
+                                }
+                            }
+                        }
+                        else{
+                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                                if(move.x > blockPieces[0].x){
+                                    newMove.push(move)
+                                }
+                            }
+                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                                if(move.x > blockPieces[0].x - 1){
+                                    newMove.push(move)
+                                }
+                            }
                         }
                     }
                 })
