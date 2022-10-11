@@ -29,10 +29,21 @@ export default class Pawn extends Pieces{
                 }
             })
         })
+
+        console.log(blockPieces)
+        console.log(positon)
+
         if(blockPieces.length){
             positon.forEach((pos)=>{
-                if(pos.x > blockPieces[0].x){
-                    newPos.push(pos)
+                if(this.playerNumber == 1){
+                    if(pos.y < blockPieces[0].y){
+                        newPos.push(pos)
+                    }
+                }
+                else{
+                    if(pos.y > blockPieces[0].y){
+                        newPos.push(pos)
+                    }
                 }
             })
         }
