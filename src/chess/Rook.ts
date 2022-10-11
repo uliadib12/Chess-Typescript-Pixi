@@ -41,26 +41,6 @@ export class Rook extends Pieces{
         return newPosition
     }
 
-    private getPiecePlayerWithPos(position: Pos): "playerOne" | "playerTwo" | "notFound"{
-        const allPos = GameManager.Instance.getAllPiecesPosition()
-
-        let returnVal : "playerOne" | "playerTwo" | "notFound" = "notFound"
-
-        allPos.playerOne.forEach(pos=>{
-            if(pos.x == position.x && pos.y == position.y){
-                returnVal = "playerOne"
-            }
-        })
-
-        allPos.playerTwo.forEach(pos=>{
-            if(pos.x == position.x && pos.y == position.y){
-                returnVal = "playerTwo"
-            }
-        })
-
-        return returnVal
-    }
-
     private solveBlocked(position: Pos[]): Pos[] {
         let newMove: Pos[] = []
         const allPos = GameManager.Instance.getAllPiecesPosition() 
@@ -207,8 +187,8 @@ export class Rook extends Pieces{
             newPos.push({x: this.position.x, y: this.position.y - i})
         }
 
-        newPos = super.solveBoundary(newPos)
         newPos = this.solveBlocked(newPos)
+        newPos = super.solveBoundary(newPos)
 
         return newPos
     }

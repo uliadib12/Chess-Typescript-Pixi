@@ -16,9 +16,38 @@ export default class Pawn extends Pieces{
         this.position = newPositon
         this.moveSprite(newPositon)
     }
+
+    solveBlocked(positon: Pos[]): Pos[]{
+        let newPos: Pos[] = []
+        let allPieces: Pos[] = GameManager.Instance.getAllPiecesPosition().playerOne.concat(GameManager.Instance.getAllPiecesPosition().playerTwo)
+
+        let blockPieces: Pos[] = []
+        positon.forEach((pos)=>{
+            allPieces.forEach((position)=>{
+                if(pos.x == position.x && pos.y == position.y){
+                    blockPieces.push(pos)
+                }
+            })
+        })
+        if(blockPieces.length){
+            positon.forEach((pos)=>{
+                if(pos.x > blockPieces[0].x){
+                    newPos.push(pos)
+                }
+            })
+        }
+        else{
+            positon.forEach((pos)=>{
+                newPos.push(pos)
+            })
+        }
+
+        return newPos
+    }
     
     getMove(): Pos[] {
         let newPos : Pos[] = []
+
         for (let i = 1; i <= (this.isFirstMove ? 2 : 1); i++) {
             if(this.playerNumber == 1){
                 newPos.push({x: this.position.x , y: this.position.y + i})
@@ -28,7 +57,41 @@ export default class Pawn extends Pieces{
             }
         }
 
+        newPos = this.solveBlocked(newPos)
+
+        if(this.playerNumber == 1){
+            let pos = {x: this.position.x + 1, y: this.position.y + 1}
+            let player= this.getPiecePlayerWithPos(pos)
+
+            if(player  == "playerTwo"){
+                newPos.push(pos)
+            }
+
+            pos = {x: this.position.x - 1, y: this.position.y + 1}
+            player = this.getPiecePlayerWithPos(pos)
+
+            if(player == "playerTwo"){
+                newPos.push(pos)
+            }
+        }
+        else{
+            let pos = {x: this.position.x + 1, y: this.position.y - 1}
+            let player= this.getPiecePlayerWithPos(pos)
+
+            if(player  == "playerOne"){
+                newPos.push(pos)
+            }
+
+            pos = {x: this.position.x - 1, y: this.position.y - 1}
+            player = this.getPiecePlayerWithPos(pos)
+
+            if(player == "playerOne"){
+                newPos.push(pos)
+            }
+        }
+
         newPos = super.solveBoundary(newPos)
+
         return newPos
     }
 }

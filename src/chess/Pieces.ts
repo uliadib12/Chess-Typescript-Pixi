@@ -33,6 +33,26 @@ export default abstract class Pieces implements Drawble {
       return player
   }
 
+  protected getPiecePlayerWithPos(position: Pos): "playerOne" | "playerTwo" | "notFound"{
+   const allPos = GameManager.Instance.getAllPiecesPosition()
+
+   let returnVal : "playerOne" | "playerTwo" | "notFound" = "notFound"
+
+   allPos.playerOne.forEach(pos=>{
+       if(pos.x == position.x && pos.y == position.y){
+           returnVal = "playerOne"
+       }
+   })
+
+   allPos.playerTwo.forEach(pos=>{
+       if(pos.x == position.x && pos.y == position.y){
+           returnVal = "playerTwo"
+       }
+   })
+
+   return returnVal
+}
+
 //   abstract seperatePieceMoves(position: Pos[]): Pos[][]
 
    setPositon(newPositon: Pos): void {
