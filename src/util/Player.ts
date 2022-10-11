@@ -180,7 +180,7 @@ export default class Player {
          queen = new Queen(1 , {x: 4, y}, this.playerNumber, PIXI.Sprite.from('./sprite/w_queen_png_shadow_128px.png'))
       }
       else{
-         queen = new Queen(1 , {x: 5, y}, this.playerNumber, PIXI.Sprite.from('./sprite/b_queen_png_shadow_128px.png'))
+         queen = new Queen(1 , {x: 4, y}, this.playerNumber, PIXI.Sprite.from('./sprite/b_queen_png_shadow_128px.png'))
       }
       queen.draw()
       this.pieces.queen.push(queen)
@@ -194,7 +194,7 @@ export default class Player {
          king = new King(1 , {x: 5, y}, this.playerNumber, PIXI.Sprite.from('./sprite/w_king_png_shadow_128px.png'))
       }
       else{
-         king = new King(1 , {x: 4, y}, this.playerNumber, PIXI.Sprite.from('./sprite/b_king_png_shadow_128px.png'))
+         king = new King(1 , {x: 5, y}, this.playerNumber, PIXI.Sprite.from('./sprite/b_king_png_shadow_128px.png'))
       }
       king.draw()
       this.pieces.king = king
