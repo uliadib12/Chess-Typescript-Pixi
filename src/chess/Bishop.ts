@@ -116,12 +116,12 @@ export class Bishop extends Pieces {
                     if(i == 2){
                         if(this.playerNumber == 1){
                             if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
-                                if(move.y > blockPieces[0].y && move.x > blockPieces[0].x){
+                                if(move.y > blockPieces[0].y){
                                     newPos.push(move)
                                 }
                             }
                             else if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
-                                if(move.y > blockPieces[0].y + 1 && move.x > blockPieces[0].x + 1){
+                                if(move.y > blockPieces[0].y - 1){
                                     newPos.push(move)
                                 }
                             }
