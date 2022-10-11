@@ -13,6 +13,26 @@ export default class GameManager {
         return this.instance || (this.instance = new this());
     }
 
+    public getPiecePlayerWithPos(position: Pos): "playerOne" | "playerTwo" | "notFound"{
+      const allPos = this.getAllPiecesPosition()
+   
+      let returnVal : "playerOne" | "playerTwo" | "notFound" = "notFound"
+   
+      allPos.playerOne.forEach(pos=>{
+          if(pos.x == position.x && pos.y == position.y){
+              returnVal = "playerOne"
+          }
+      })
+   
+      allPos.playerTwo.forEach(pos=>{
+          if(pos.x == position.x && pos.y == position.y){
+              returnVal = "playerTwo"
+          }
+      })
+   
+      return returnVal
+     }
+
     public getAllPiecesPosition(): {playerOne: Pos[], playerTwo: Pos[]}{
         let position: {playerOne: Pos[], playerTwo: Pos[]} = {playerOne: [], playerTwo: []}
         const playerOne = this.playerOne

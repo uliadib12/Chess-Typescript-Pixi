@@ -70,14 +70,14 @@ export default class Pawn extends Pieces{
 
         if(this.playerNumber == 1){
             let pos = {x: this.position.x + 1, y: this.position.y + 1}
-            let player= this.getPiecePlayerWithPos(pos)
+            let player= GameManager.Instance.getPiecePlayerWithPos(pos)
 
             if(player  == "playerTwo"){
                 newPos.push(pos)
             }
 
             pos = {x: this.position.x - 1, y: this.position.y + 1}
-            player = this.getPiecePlayerWithPos(pos)
+            player = GameManager.Instance.getPiecePlayerWithPos(pos)
 
             if(player == "playerTwo"){
                 newPos.push(pos)
@@ -85,14 +85,14 @@ export default class Pawn extends Pieces{
         }
         else{
             let pos = {x: this.position.x + 1, y: this.position.y - 1}
-            let player= this.getPiecePlayerWithPos(pos)
+            let player= GameManager.Instance.getPiecePlayerWithPos(pos)
 
             if(player  == "playerOne"){
                 newPos.push(pos)
             }
 
             pos = {x: this.position.x - 1, y: this.position.y - 1}
-            player = this.getPiecePlayerWithPos(pos)
+            player = GameManager.Instance.getPiecePlayerWithPos(pos)
 
             if(player == "playerOne"){
                 newPos.push(pos)

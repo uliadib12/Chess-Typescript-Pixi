@@ -33,11 +33,18 @@ export default class Player {
 
       moves.forEach((move)=>{
          let dotContainer = new PIXI.Container()
-
+         
          let dot = new PIXI.Graphics()
          dot.beginFill(0xA9A9A9, 0.6)
          dot.drawCircle((SIZE_TILE/2) + (SIZE_TILE * (move.x - 1)), (app.view.height - (SIZE_TILE/2)) - (SIZE_TILE * (move.y - 1)), 10)
          dot.endFill()
+
+         if(GameManager.Instance.getPiecePlayerWithPos(move) == "playerOne" || GameManager.Instance.getPiecePlayerWithPos(move) == "playerTwo"){
+            dot = new PIXI.Graphics()
+            dot.beginFill(0xDC143C, 0.6)
+            dot.drawCircle((SIZE_TILE/2) + (SIZE_TILE * (move.x - 1)), (app.view.height - (SIZE_TILE/2)) - (SIZE_TILE * (move.y - 1)), 10)
+            dot.endFill()
+         }
 
          let box = new PIXI.Graphics()
          box.beginFill(0xDE3249, 0.5)

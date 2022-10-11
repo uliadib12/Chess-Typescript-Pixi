@@ -63,24 +63,24 @@ export class Bishop extends Pieces {
                 moves.forEach((move)=>{
                     if(i == 0){
                         if(this.playerNumber == 1){
-                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                            if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
                                 if(move.y < blockPieces[0].y){
                                     newPos.push(move)
                                 }
                             }
-                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                            else if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
                                 if(move.y < blockPieces[0].y + 1){
                                     newPos.push(move)
                                 }
                             }
                         }
                         else{
-                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                            if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
                                 if(move.y < blockPieces[0].y){
                                     newPos.push(move)
                                 }
                             }
-                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                            else if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
                                 if(move.y < blockPieces[0].y + 1){
                                     newPos.push(move)
                                 }
@@ -89,24 +89,24 @@ export class Bishop extends Pieces {
                     }
                     if(i == 1){
                         if(this.playerNumber == 1){
-                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                            if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
                                 if(move.y > blockPieces[0].y){
                                     newPos.push(move)
                                 }
                             }
-                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                            else if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
                                 if(move.y > blockPieces[0].y - 1){
                                     newPos.push(move)
                                 }
                             }
                         }
                         else{
-                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                            if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
                                 if(move.y > blockPieces[0].y){
                                     newPos.push(move)
                                 }
                             }
-                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                            else if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
                                 if(move.y > blockPieces[0].y - 1){
                                     newPos.push(move)
                                 }
@@ -115,24 +115,24 @@ export class Bishop extends Pieces {
                     }
                     if(i == 2){
                         if(this.playerNumber == 1){
-                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                            if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
                                 if(move.y > blockPieces[0].y && move.x > blockPieces[0].x){
                                     newPos.push(move)
                                 }
                             }
-                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                            else if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
                                 if(move.y > blockPieces[0].y + 1 && move.x > blockPieces[0].x + 1){
                                     newPos.push(move)
                                 }
                             }
                         }
                         else{
-                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                            if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
                                 if(move.y > blockPieces[0].y){
                                     newPos.push(move)
                                 }
                             }
-                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                            else if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
                                 if(move.y > blockPieces[0].y - 1){
                                     newPos.push(move)
                                 }
@@ -141,24 +141,24 @@ export class Bishop extends Pieces {
                     }
                     if(i == 3){
                         if(this.playerNumber == 1){
-                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                            if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
                                 if(move.x > blockPieces[0].x){
                                     newPos.push(move)
                                 }
                             }
-                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                            else if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
                                 if(move.x > blockPieces[0].x - 1){
                                     newPos.push(move)
                                 }
                             }
                         }
                         else{
-                            if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
+                            if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerTwo"){
                                 if(move.x > blockPieces[0].x){
                                     newPos.push(move)
                                 }
                             }
-                            else if(this.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
+                            else if(GameManager.Instance.getPiecePlayerWithPos(blockPieces[0]) == "playerOne"){
                                 if(move.x > blockPieces[0].x - 1){
                                     newPos.push(move)
                                 }
