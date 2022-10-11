@@ -65,7 +65,7 @@ export class Queen extends Pieces {
         return newPosition
     }
 
-    private solveBlocked(position: Pos[]): Pos[] {
+    protected solveBlocked(position: Pos[]): Pos[] {
         let newMove: Pos[] = []
         const allPos = GameManager.Instance.getAllPiecesPosition() 
         let allPiecesPosition = allPos.playerOne.concat(allPos.playerTwo)
