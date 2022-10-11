@@ -187,6 +187,7 @@ export class Rook extends Pieces{
             newPos.push({x: this.position.x, y: this.position.y - i})
         }
 
+        newPos = super.solveBoundary(newPos)
         newPos = this.solveBlocked(newPos)
         newPos = super.solveBoundary(newPos)
 

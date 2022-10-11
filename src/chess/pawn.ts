@@ -30,9 +30,6 @@ export default class Pawn extends Pieces{
             })
         })
 
-        console.log(blockPieces)
-        console.log(positon)
-
         if(blockPieces.length){
             positon.forEach((pos)=>{
                 if(this.playerNumber == 1){
@@ -68,6 +65,7 @@ export default class Pawn extends Pieces{
             }
         }
 
+        newPos = super.solveBoundary(newPos)
         newPos = this.solveBlocked(newPos)
 
         if(this.playerNumber == 1){
