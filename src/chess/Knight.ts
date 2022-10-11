@@ -29,9 +29,6 @@ export class Knight extends Pieces{
             })
         })
 
-        console.log(blockPieces)
-        console.log(position)
-
         if(blockPieces.length){
             position.forEach((pos)=>{
                 let found = false
