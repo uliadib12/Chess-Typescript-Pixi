@@ -7,6 +7,7 @@ import Pieces from "./Pieces";
 export class Queen extends Pieces {
     constructor(id: number, positon: Pos, playerNumber: 1 | 2, textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_queen_png_shadow_128px.png')){
         super(id,positon,playerNumber,textureSprite);
+        this.type = "queen"
     }
 
     seperatePieceMoves(position: Pos[]): Pos[][] {

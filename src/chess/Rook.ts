@@ -7,6 +7,7 @@ import Pieces from "./Pieces";
 export class Rook extends Pieces{
     constructor(id: number, positon: Pos, playerNumber: 1 | 2 , textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_rook_png_shadow_128px.png')){
         super(id,positon,playerNumber,textureSprite)
+        this.type = "rook"
     }
     
     seperatePieceMoves(position: Pos[]): Pos[][] {

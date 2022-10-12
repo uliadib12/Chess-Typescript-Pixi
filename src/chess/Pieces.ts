@@ -8,6 +8,7 @@ const TILE_XY_COUNT = 8
 export default abstract class Pieces implements Drawble {
    public id : number
    public playerNumber: 1 | 2
+   public type :  "pawn" | "rook" | "knight" | "bishop" | "queen" | "king"
    public position: Pos
    public sprite : PIXI.Sprite
    protected readonly spriteScale = 0.55

@@ -7,6 +7,7 @@ import Pieces from "./Pieces";
 export class Bishop extends Pieces {
     constructor(id: number, positon: Pos, playerNumber: 1 | 2 , textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_bishop_png_shadow_128px.png')){
         super(id,positon,playerNumber,textureSprite);
+        this.type = "bishop"
     }
 
     private seperatePieceMoves(position: Pos[]): Pos[][] {
