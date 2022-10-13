@@ -18,6 +18,11 @@ export default class Pawn extends Pieces{
         this.moveSprite(newPositon)
     }
 
+    animateMove(to: Pos){
+        this.isFirstMove = false
+        super.animateMove(to)
+    }
+
     solveBlocked(positon: Pos[]): Pos[]{
         let newPos: Pos[] = []
         let allPieces: Pos[] = GameManager.Instance.getAllPiecesPosition().playerOne.concat(GameManager.Instance.getAllPiecesPosition().playerTwo)
