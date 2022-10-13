@@ -1,3 +1,4 @@
+import { Sprite } from "pixi.js";
 import GameManager from "../util/GameManager";
 import { Drawble, Pos } from "../util/interface"
 import PIXI, { app } from "../util/PIXI";
@@ -79,4 +80,30 @@ export default abstract class Pieces implements Drawble {
       this.moveSprite(this.position)
       app.stage.addChild(this.sprite)
   }
+
+  public animateMove(to: Pos){
+   let from = this.position
+   let ticker = app.ticker
+   let time = 0
+
+   let move = (delta: any)=>{
+      time += delta / 10
+      let learpX = from.x + (to.x - from.x) * time
+      let learpY = from.y + (to.y - from.y) * time
+
+      if(time > 1){
+         this.moveSprite(to)
+         this.position = to
+         this.sprite.interactive = true
+         ticker.remove(move)
+      }
+      else{
+         this.sprite.interactive = false
+         this.moveSprite({x: learpX, y: learpY})
+      }
+
+   }
+
+   ticker.add(move)
+}
 }

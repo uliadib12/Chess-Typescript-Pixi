@@ -1,6 +1,7 @@
 import Board from "../chess/Board";
 import Pieces from "../chess/Pieces";
 import { Pos } from "./interface";
+import PIXI, { app } from "./PIXI";
 import Player from "./Player";
 
 export default class GameManager {
@@ -21,11 +22,9 @@ export default class GameManager {
 
       if(player == "playerOne"){
          allPieces = this.playerOne.getAllPieces()
-         console.log("player = playerOne")
       }
       else if(player == "playerTwo"){
          allPieces = this.playerTwo.getAllPieces()
-         console.log("player = playerTwo")
       }
       
       if(!(allPieces == undefined)){

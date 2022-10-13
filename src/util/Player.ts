@@ -1,3 +1,4 @@
+import { Sprite } from "pixi.js"
 import { Bishop } from "../chess/Bishop"
 import { SIZE_TILE } from "../chess/Board"
 import { King } from "../chess/King"
@@ -119,12 +120,12 @@ export default class Player {
                   return
                }
                this.capturePieces(enemyPiece)
-            }
-            
-            piece.setPositon(move)
-            this.deleteDot()
-            this.piecesSelected = undefined
-            this.isPiecesSelected = false
+         }
+
+         piece.animateMove(move)
+         this.deleteDot()
+         this.piecesSelected = undefined
+         this.isPiecesSelected = false
          })
 
          dotContainer.addChild(dot)
