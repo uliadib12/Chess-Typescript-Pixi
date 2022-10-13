@@ -70,6 +70,10 @@ export default abstract class Pieces implements Drawble {
       this.sprite.y = app.view.height - (pos.y - 1) * this.spriteScale * 135.5 - 72
   }
 
+  destroySprite(){
+   this.sprite.destroy()
+  }
+
   draw(): void {
       this.sprite.scale = new PIXI.Point(this.spriteScale, this.spriteScale)
       this.moveSprite(this.position)

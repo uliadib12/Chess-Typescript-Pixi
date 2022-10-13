@@ -28,6 +28,63 @@ export default class Player {
       return this.pieces
    }
 
+   private capturePieces(piece: Pieces){
+      this.removePieces(piece)
+      piece.destroySprite()
+   }
+
+   private removePieces(piece: Pieces){
+      let enemy: Player
+
+      if(this.playerNumber == 1){
+         enemy = GameManager.Instance.playerTwo
+      }
+      else{
+         enemy = GameManager.Instance.playerOne
+      }
+
+      if(piece instanceof Pawn){
+         let deletedPawn = enemy.pieces.pawns.filter((pawn)=>{
+            if(!(pawn.id == piece.id)){
+               return true
+            }
+         })
+         enemy.pieces.pawns = deletedPawn
+      }
+      else if(piece instanceof Rook){
+         let deletedRook = enemy.pieces.rooks.filter((rook)=>{
+            if(!(rook.id == piece.id)){
+               return true
+            }
+         })
+         enemy.pieces.rooks = deletedRook
+      }
+      else if(piece instanceof Knight){
+         let deletedKnight = enemy.pieces.knight.filter((knight)=>{
+            if(!(knight.id == piece.id)){
+               return true
+            }
+         })
+         enemy.pieces.knight = deletedKnight
+      }
+      else if(piece instanceof Bishop){
+         let deletedBishop = enemy.pieces.bishop.filter((bishop)=>{
+            if(!(bishop.id == piece.id)){
+               return true
+            }
+         })
+         enemy.pieces.bishop = deletedBishop
+      }
+      else if(piece instanceof Queen){
+         let deletedQueen = enemy.pieces.queen.filter((queen)=>{
+            if(!(queen.id == piece.id)){
+               return true
+            }
+         })
+         enemy.pieces.queen = deletedQueen
+      }
+   }
+
    private drawMove(piece: Pieces){
       let moves = piece.getMove()
 
@@ -57,6 +114,10 @@ export default class Player {
 
          box.on('pointerdown', (event) => {
             console.log(GameManager.Instance.getPieceWithPos(move))
+            let enemyPiece = GameManager.Instance.getPieceWithPos(move)
+            if(enemyPiece != undefined){
+               this.capturePieces(enemyPiece)
+            }
             piece.setPositon(move)
             this.deleteDot()
             this.piecesSelected = undefined
