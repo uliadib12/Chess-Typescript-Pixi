@@ -90,15 +90,15 @@ export default abstract class Pieces implements Drawble {
       time += delta / 10
       let learpX = from.x + (to.x - from.x) * time
       let learpY = from.y + (to.y - from.y) * time
+      this.sprite.interactive = false
+      this.position = to
 
       if(time > 1){
          this.moveSprite(to)
-         this.position = to
          this.sprite.interactive = true
          ticker.remove(move)
       }
       else{
-         this.sprite.interactive = false
          this.moveSprite({x: learpX, y: learpY})
       }
 
