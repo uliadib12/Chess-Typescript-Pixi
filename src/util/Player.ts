@@ -96,7 +96,7 @@ export default class Player {
          dot.drawCircle((SIZE_TILE/2) + (SIZE_TILE * (move.x - 1)), (app.view.height - (SIZE_TILE/2)) - (SIZE_TILE * (move.y - 1)), 10)
          dot.endFill()
 
-         if(GameManager.Instance.getPiecePlayerWithPos(move) == "playerOne" || GameManager.Instance.getPiecePlayerWithPos(move) == "playerTwo"){
+         if((GameManager.Instance.getPiecePlayerWithPos(move) == "playerOne" || GameManager.Instance.getPiecePlayerWithPos(move) == "playerTwo") && GameManager.Instance.getPieceWithPos(move).type != "king"){
             dot = new PIXI.Graphics()
             dot.beginFill(0xDC143C, 0.6)
             dot.drawCircle((SIZE_TILE/2) + (SIZE_TILE * (move.x - 1)), (app.view.height - (SIZE_TILE/2)) - (SIZE_TILE * (move.y - 1)), 10)
@@ -113,11 +113,14 @@ export default class Player {
          box.buttonMode = true
 
          box.on('pointerdown', (event) => {
-            console.log(GameManager.Instance.getPieceWithPos(move))
             let enemyPiece = GameManager.Instance.getPieceWithPos(move)
             if(enemyPiece != undefined){
+               if(enemyPiece.type == "king"){
+                  return
+               }
                this.capturePieces(enemyPiece)
             }
+            
             piece.setPositon(move)
             this.deleteDot()
             this.piecesSelected = undefined
