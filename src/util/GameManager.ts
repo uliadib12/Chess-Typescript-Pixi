@@ -1,4 +1,5 @@
 import Board from "../chess/Board";
+import Pieces from "../chess/Pieces";
 import { Pos } from "./interface";
 import Player from "./Player";
 
@@ -11,6 +12,59 @@ export default class GameManager {
     public static get Instance()
     {
         return this.instance || (this.instance = new this());
+    }
+
+    public getPieceWithPos(position: Pos): Pieces{
+      let piece: Pieces = undefined
+      let player = this.getPiecePlayerWithPos(position)
+      let allPieces = undefined
+
+      if(player == "playerOne"){
+         allPieces = this.playerOne.getAllPieces()
+         console.log("player = playerOne")
+      }
+      else if(player == "playerTwo"){
+         allPieces = this.playerTwo.getAllPieces()
+         console.log("player = playerTwo")
+      }
+      
+      if(!(allPieces == undefined)){
+         allPieces.pawns.forEach(pawn => {
+            if(pawn.position.x == position.x && pawn.position.y == position.y){
+               piece = pawn
+            }
+         })
+   
+         allPieces.rooks.forEach(rook => {
+            if(rook.position.x == position.x && rook.position.y == position.y){
+               piece = rook
+            }
+         })
+   
+         allPieces.knight.forEach(knight => {
+            if(knight.position.x == position.x && knight.position.y == position.y){
+               piece = knight
+            }
+         })
+   
+         allPieces.bishop.forEach(bishop => {
+            if(bishop.position.x == position.x && bishop.position.y == position.y){
+               piece = bishop
+            }
+         })
+   
+         allPieces.queen.forEach(queen => {
+            if(queen.position.x == position.x && queen.position.y == position.y){
+               piece = queen
+            }
+         })
+
+         if(allPieces.king.position.x == position.x && allPieces.king.position.y == position.y){
+            piece = allPieces.king
+         }
+      }
+
+      return piece
     }
 
     public getPiecePlayerWithPos(position: Pos): "playerOne" | "playerTwo" | "notFound"{

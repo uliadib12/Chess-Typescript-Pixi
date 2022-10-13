@@ -56,6 +56,7 @@ export default class Player {
          box.buttonMode = true
 
          box.on('pointerdown', (event) => {
+            console.log(GameManager.Instance.getPieceWithPos(move))
             piece.setPositon(move)
             this.deleteDot()
             this.piecesSelected = undefined
