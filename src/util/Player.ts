@@ -131,6 +131,7 @@ export default class Player {
          dotContainer.addChild(dot)
          dotContainer.addChild(box)
 
+         dotContainer.zIndex = 999
          app.stage.addChild(dotContainer)
 
          this.dotsMoves.push(dotContainer)

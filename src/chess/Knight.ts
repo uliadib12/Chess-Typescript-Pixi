@@ -8,6 +8,7 @@ export class Knight extends Pieces{
     constructor(id: number, positon: Pos, playerNumber: 1 | 2, textureSprite: PIXI.Sprite = PIXI.Sprite.from('./sprite/w_knight_png_shadow_128px.png')){
         super(id,positon,playerNumber,textureSprite);
         this.type = "knight"
+        this.sprite.zIndex = 99
     }
 
     protected solveBlocked(position: Pos[]): Pos[] {
