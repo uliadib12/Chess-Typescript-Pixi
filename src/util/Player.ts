@@ -15,7 +15,7 @@ export default class Player {
    public playerNumber: 1 | 2
    private color: "white" | "black"
    private countPieces = 0
-   private pieces: {pawns: Pawn[], rooks: Rook[], knight: Knight[], bishop: Bishop[], queen: Queen[], king?: King} = {pawns: [], rooks: [], knight: [], bishop: [], queen: []}
+   public pieces: {pawns: Pawn[], rooks: Rook[], knight: Knight[], bishop: Bishop[], queen: Queen[], king?: King} = {pawns: [], rooks: [], knight: [], bishop: [], queen: []}
    private piecesSelected: Pieces
    private dotsMoves: PIXI.Container[] = []
    private isPiecesSelected: boolean = false

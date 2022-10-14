@@ -3,6 +3,7 @@ import { Pos } from "../util/interface";
 import PIXI, { app } from "../util/PIXI";
 import Player from "../util/Player";
 import Pieces from "./Pieces";
+import { Queen } from "./Queen";
 
 export default class Pawn extends Pieces{
     private isFirstMove: boolean = true
@@ -21,6 +22,37 @@ export default class Pawn extends Pieces{
     animateMove(to: Pos){
         this.isFirstMove = false
         super.animateMove(to)
+
+        let player: Player
+        let newQueen: Queen
+        let newPos: Pos = to
+
+        if(to.y == 8 && this.playerNumber == 1 || to.y == 1 && this.playerNumber == 2){
+            if(to.y == 8 && this.playerNumber == 1){
+                player = GameManager.Instance.playerOne
+                const newID = player.pieces.queen.length + 1
+                newQueen = new Queen(newID, newPos, this.playerNumber, PIXI.Sprite.from('./sprite/w_queen_png_shadow_128px.png'))
+            }
+            else if(to.y == 1 && this.playerNumber == 2){
+                player = GameManager.Instance.playerTwo
+                const newID = player.pieces.queen.length + 1
+                newQueen = new Queen(newID, newPos, this.playerNumber, PIXI.Sprite.from('./sprite/b_queen_png_shadow_128px.png'))
+            }
+    
+            let newPawns = player.pieces.pawns.filter((pawn)=>{
+                if(!(pawn.id == this.id)){
+                    return true
+                }
+            })
+            newQueen.draw()
+            newQueen.sprite.interactive = true
+            player.pieces.queen.push(newQueen)
+
+
+            player.pieces.pawns = newPawns
+            this.sprite.alpha = 0
+            this.sprite.interactive = false
+        }
     }
 
     solveBlocked(positon: Pos[]): Pos[]{
